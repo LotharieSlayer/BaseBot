@@ -17,7 +17,7 @@ BaseBot est un bot exemple, tournant avec Discord.js v14, et est un fork de [Wha
 
 # Installation : 
 
-Ouvre ton terminal favori depuis le dossier `basebot/` et fait un simple `npm i`.
+Ouvre ton terminal favori depuis le dossier `BaseBot/` et fait un simple `npm i`.
 Si la commande ne marche pas et que vous n'avez pas npm ou node d'installé sur votre ordinateur, installez Node LTS : https://nodejs.org/.
 
 Une fois `npm i` fini, vous pouvez démarrer le bot par un simple `node main.js` depuis le dossier `src/`.
