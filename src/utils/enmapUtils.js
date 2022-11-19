@@ -99,5 +99,4 @@ module.exports = {
     setupWelcome,
     memes,
     presence,
-    advices
 }

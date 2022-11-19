@@ -4,12 +4,8 @@
  *		This event is used to store the memes in the database and add their initial reactions.
  */
 
-// const { activeMember } = require("../utils/modules/activeMember.js");
-const { ChannelType, PermissionsBitField } = require("discord.js");
-const { proposition } = require("../modules/proposition.js");
 const { thread } = require("../modules/thread.js");
-const { memes, getSetupData, setupContest } = require("../utils/enmapUtils.js");
-let warns = new Map();
+const { memes, getSetupData } = require("../utils/enmapUtils.js");
 
 /* ----------------------------------------------- */
 /* FUNCTIONS                                       */

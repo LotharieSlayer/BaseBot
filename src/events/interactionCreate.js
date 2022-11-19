@@ -5,10 +5,6 @@
  */
 
 const { InteractionType } = require("discord.js");
-const { handleResponse } = require("../commands/report/cmReport");
-const { handleResponseUser } = require("../commands/report/cuReport");
-const { reportAssignButton, reportCloseButton } = require("../modules/report");
-const { setupContest } = require("../utils/enmapUtils");
 /* ----------------------------------------------- */
 /* FUNCTIONS                                       */
 /* ----------------------------------------------- */
