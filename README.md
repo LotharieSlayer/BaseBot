@@ -7,7 +7,7 @@
 
 ### **Bienvenue sur la documentation de BaseBot !**
 
-BaseBot est un bot exemple, tournant avec Discord.js v14, et est un fork de [WhatThePhoqueBot](https://github.com/LotharieSlayer/wtpbot.git). Vous trouverez dans ce git un template qui vous servira de base pour votre potentiel futur bot. 
+BaseBot est un bot exemple, tournant avec Discord.js v14, et est un fork de [WhatThePhoqueBot](https://github.com/LotharieSlayer/wtpbot.git). Vous trouverez dans ce git un template qui vous servira de base pour votre potentiel futur bot. La documentation en franglais pour aider les français dans l'apprentissage du code.
 
 <br/>
 
