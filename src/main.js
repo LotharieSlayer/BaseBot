@@ -4,46 +4,54 @@
  * 		The base file of the bot.
  */
 
-
-const { TOKEN, DEV_GUILD_ID } = require( "./files/config.json" );
-const { Client, Collection, Intents } = require( "discord.js" );
-const { loadCommands, loadEvents } = require( "./utils/loadAssets" );
-const { loadCommandsToGuild } = require( "./utils/registerCommands" );
-
+const { Client, Collection, GatewayIntentBits, Partials  } = require( "discord.js" );
+const { loadCommands, loadEvents, loadCommandToAllGuilds } = require( "./utils/loadAssets" );
+// const { loadCommandsToGuild } = require( "./utils/loadAssets" );
+require( "dotenv" ).config( { path: '.env' } );
+const events = require('events');
 
 const client = new Client({
 	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.DIRECT_MESSAGES,
-		Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.DirectMessages,
+		GatewayIntentBits.GuildMessageReactions,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildVoiceStates,
+		GatewayIntentBits.GuildBans,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMessageTyping,
 	],
 	partials: [
-		"MESSAGE",
-		"REACTION"
+		Partials.Message,
+		Partials.Reaction,
+		Partials.GuildMember,
+		Partials.User,
+		Partials.Channel,
+		Partials.ThreadMember,
 	]
 });
 
-
 client.commands = new Collection();
+
+// WARNING: Ces eventsEmitter ne sont en aucun cas lié à ceux de discord.js mais à ceux de l'application en local. Ils sont généralement utilisés pour les services/.
+client.eventsEmitter = new events.EventEmitter();
+
+client.services = new Collection();
+
 (async () => {
 	await loadCommands( client );
 	await loadEvents( client );
-	await client.login( TOKEN );
-	await loadCommandsToGuild( client.user.id, DEV_GUILD_ID, TOKEN );
+	await client.login( process.env.TOKEN );
+	// for(guild of process.env.DEV_GUILD_ID)
+		// await loadCommandsToGuild( client, process.env.DEV_GUILD_ID );
+	await loadCommandToAllGuilds( client );
 })();
 
+/* ----------------------------------------------- */
+/* MODULE EXPORTS                                  */
+/* ----------------------------------------------- */
 
 module.exports = {
 	client: client
 }
-
-/* ----------------------------------------------- */
-/* COMMAND BUILD                                   */
-/* ----------------------------------------------- */
-/* ----------------------------------------------- */
-/* FUNCTIONS                                       */
-/* ----------------------------------------------- */
-/* ----------------------------------------------- */
-/* MODULE EXPORTS                                  */
-/* ----------------------------------------------- */

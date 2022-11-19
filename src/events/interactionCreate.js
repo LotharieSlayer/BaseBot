@@ -4,10 +4,11 @@
  *		It manage the slash commands.
  */
 
-
-const { CommandInteraction, Client } = require( "discord.js" );
-
-
+const { InteractionType } = require("discord.js");
+const { handleResponse } = require("../commands/report/cmReport");
+const { handleResponseUser } = require("../commands/report/cuReport");
+const { reportAssignButton, reportCloseButton } = require("../modules/report");
+const { setupContest } = require("../utils/enmapUtils");
 /* ----------------------------------------------- */
 /* FUNCTIONS                                       */
 /* ----------------------------------------------- */
@@ -18,17 +19,20 @@ const { CommandInteraction, Client } = require( "discord.js" );
  * @param {CommandInteraction} interaction The interaction that triggered the event.
  * @param {Client} client The client that created the interaction.
  */
-function execute( interaction, client ) {
-	if ( interaction.isCommand() ) {
-		client.commands.get( interaction.commandName ).execute( interaction );
-	}
+function execute(interaction, client) {
+    if (interaction.type === InteractionType.ApplicationCommand) {
+        client.commands.get(interaction.commandName).execute(interaction);
+    }
+    
+    if (interaction.isContextMenuCommand()) {
+        client.commands.get(interaction.commandName).execute(interaction);
+    }
 }
-
 
 /* ----------------------------------------------- */
 /* MODULE EXPORTS                                  */
 /* ----------------------------------------------- */
 module.exports = {
-	name: "interactionCreate",
-	execute
-}
+    name: "interactionCreate",
+    execute,
+};

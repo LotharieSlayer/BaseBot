@@ -5,8 +5,7 @@
  */
 
 
-const { Client } = require( "discord.js" );
-
+const { ActivityType } = require( "discord.js" );
 
 /* ----------------------------------------------- */
 /* FUNCTIONS                                       */
@@ -17,6 +16,17 @@ const { Client } = require( "discord.js" );
  */
 function execute( client ) {
 	console.log( `${client.user.username} is connected!` );
+
+	loadPresence(client)
+
+}
+
+async function loadPresence( client ){
+    const { presence } = require("../utils/enmapUtils")
+	setInterval(() => {
+		// Met la phrase dans le statut du bot.
+        client.user.setActivity(presence.randomKey(1)[0], { type: ActivityType.Watching });
+    }, 10000);
 }
 
 
@@ -25,5 +35,6 @@ function execute( client ) {
 /* ----------------------------------------------- */
 module.exports = {
 	name: "ready",
+	once : true,
 	execute
 }
