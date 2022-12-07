@@ -5,7 +5,7 @@
  */
 
 const { Client, Collection, GatewayIntentBits, Partials  } = require( "discord.js" );
-const { loadCommands, loadEvents, loadCommandToAllGuilds } = require( "./utils/loadAssets" );
+const { loadCommands, loadEvents, loadCommandToAllGuilds, loadPlugins } = require( "./utils/loadAssets" );
 // const { loadCommandsToGuild } = require( "./utils/loadAssets" );
 require( "dotenv" ).config( { path: '.env' } );
 const events = require('events');
@@ -37,15 +37,16 @@ client.commands = new Collection();
 // WARNING: Ces eventsEmitter ne sont en aucun cas lié à ceux de discord.js mais à ceux de l'application en local. Ils sont généralement utilisés pour les services/.
 client.eventsEmitter = new events.EventEmitter();
 
-client.services = new Collection();
+client.plugins = new Collection();
 
 (async () => {
 	await loadCommands( client );
 	await loadEvents( client );
 	await client.login( process.env.TOKEN );
 	// for(guild of process.env.DEV_GUILD_ID)
-		// await loadCommandsToGuild( client, process.env.DEV_GUILD_ID );
+	// await loadCommandsToGuild( client, process.env.DEV_GUILD_ID );
 	await loadCommandToAllGuilds( client );
+	await loadPlugins( client );
 })();
 
 /* ----------------------------------------------- */
