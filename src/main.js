@@ -5,7 +5,7 @@
  */
 
 const { Client, Collection, GatewayIntentBits, Partials  } = require( "discord.js" );
-const { loadCommands, loadEvents, loadCommandToAllGuilds } = require( "./utils/loadAssets" );
+const { loadCommands, loadEvents, loadCommandToAllGuilds, loadInvites } = require( "./utils/loadAssets" );
 // const { loadCommandsToGuild } = require( "./utils/loadAssets" );
 require( "dotenv" ).config( { path: '.env' } );
 const events = require('events');
@@ -29,23 +29,24 @@ const client = new Client({
 		Partials.User,
 		Partials.Channel,
 		Partials.ThreadMember,
+		
 	]
 });
 
 client.commands = new Collection();
+client.invites = new Collection();
 
-// WARNING: Ces eventsEmitter ne sont en aucun cas lié à ceux de discord.js mais à ceux de l'application en local. Ils sont généralement utilisés pour les services/.
+// WARNING: Ces eventsEmitter ne sont en aucun cas lié à ceux de discord.js mais à ceux de l'application en local. Ils sont généralement utilisés pour les plugins/.
 client.eventsEmitter = new events.EventEmitter();
 
-client.plugins = new Collection();
-
 (async () => {
-	await loadCommands( client );
-	await loadEvents( client );
-	await client.login( process.env.TOKEN );
+	await loadCommands(client);
+	await loadEvents(client);
+	await client.login(process.env.TOKEN);
 	// for(guild of process.env.DEV_GUILD_ID)
-	// await loadCommandsToGuild( client, process.env.DEV_GUILD_ID );
-	await loadCommandToAllGuilds( client );
+		// await loadCommandsToGuild( client, process.env.DEV_GUILD_ID );
+	await loadCommandToAllGuilds(client);
+	await loadInvites(client);
 })();
 
 /* ----------------------------------------------- */
