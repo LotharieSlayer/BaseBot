@@ -1,6 +1,3 @@
-[submodule "src/plugins/-f"]
-	path = src/plugins/-f
-	url = https://github.com/LotharieSlayer/logs
-[submodule "src/plugins/logs"]
-	path = src/plugins/logs
-	url = https://github.com/LotharieSlayer/logs
+[submodule "src/plugins/thread"]
+	path = src/plugins/thread
+	url = https://github.com/LotharieSlayer/thread
